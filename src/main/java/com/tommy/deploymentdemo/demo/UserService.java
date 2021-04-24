@@ -5,4 +5,8 @@ public class UserService {
     public String doSomethingA() {
         return "updateA";
     }
+
+    public String doSomethingW() {
+        return "W";
+    }
 }
