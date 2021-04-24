@@ -3,7 +3,7 @@ package com.tommy.deploymentdemo.demo;
 public class UserService {
 
     public String doSomethingA() {
-        return "A";
+        return "Ab";
     }
 
     public String doSomethingQ() {
