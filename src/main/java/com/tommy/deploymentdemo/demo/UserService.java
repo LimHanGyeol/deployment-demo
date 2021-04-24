@@ -9,4 +9,8 @@ public class UserService {
     public String doSomethingW() {
         return "W";
     }
+
+    public String doSomethingQ() {
+        return "Q";
+    }
 }
