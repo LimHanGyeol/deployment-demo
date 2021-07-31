@@ -1,4 +1,5 @@
 # application-dev.yaml
 spring:
-  profiles:
-    active: dev
+  config:
+    activate:
+      on-profile: dev

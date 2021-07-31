@@ -1,4 +1,5 @@
 # application-prod.yaml
 spring:
-  profiles:
-    active: prod
+  config:
+    activate:
+      on-profile: prod
