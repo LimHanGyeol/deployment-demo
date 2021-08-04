@@ -14,6 +14,6 @@ public class HashController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "deploy";
+        return "github webhook deploy test";
     }
 }
