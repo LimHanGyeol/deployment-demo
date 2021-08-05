@@ -3,6 +3,15 @@ spring:
   config:
     activate:
       on-profile: prod
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgresql
+    username: postgresql
+    password: postgrepassword
+  jpa:
+    show-sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: update
 
 server:
   port: 8080
