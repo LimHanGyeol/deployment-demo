@@ -1,5 +1,8 @@
 package com.tommy.deploymentdemo.demo.iobound;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tommy.deploymentdemo.demo.messagequeue.Producer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,15 +18,20 @@ public class PostController {
     private static final int PAGE_SIZE = 20;
 
     private final PostRepository postRepository;
+    private final Producer producer;
+    private final ObjectMapper objectMapper;
 
-    public PostController(PostRepository postRepository) {
+    public PostController(PostRepository postRepository, Producer producer, ObjectMapper objectMapper) {
         this.postRepository = postRepository;
+        this.producer = producer;
+        this.objectMapper = objectMapper;
     }
 
     @PostMapping("/posts")
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
-        Post savedPost = postRepository.save(post);
-        return ResponseEntity.ok(savedPost);
+    public ResponseEntity<Post> createPost(@RequestBody Post post) throws JsonProcessingException {
+        String postToJson = objectMapper.writeValueAsString(post);
+        producer.sendTo(postToJson);
+        return ResponseEntity.ok(post);
     }
 
     @GetMapping("/posts")
