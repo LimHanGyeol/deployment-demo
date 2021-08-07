@@ -32,7 +32,11 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
-    // 글 번호를 조회
+    @GetMapping("/posts/{id}")
+    public ResponseEntity<Post> findPostById(@PathVariable("id") Long id) {
+        Post findPost = postRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return ResponseEntity.ok(findPost);
+    }
 
     // 글 내용으로 검색 -> 해당 내용이 포함된 모든 글글
 }
