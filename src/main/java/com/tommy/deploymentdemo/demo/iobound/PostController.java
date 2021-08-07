@@ -6,6 +6,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/api")
 @RestController
 public class PostController {
@@ -38,5 +40,9 @@ public class PostController {
         return ResponseEntity.ok(findPost);
     }
 
-    // 글 내용으로 검색 -> 해당 내용이 포함된 모든 글글
+    @GetMapping("/search")
+    public ResponseEntity<List<Post>> findPostsByContent(@RequestParam String content) {
+        List<Post> findPosts = postRepository.findByContentContains(content);
+        return ResponseEntity.ok(findPosts);
+    }
 }
