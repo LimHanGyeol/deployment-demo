@@ -15,3 +15,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+  rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
+    port: 5672
