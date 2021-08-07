@@ -1,15 +1,16 @@
 package com.tommy.deploymentdemo.demo.iobound;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@RequestMapping("/api")
 @RestController
 public class PostController {
+
+    private static final int PAGE_SIZE = 20;
 
     private final PostRepository postRepository;
 
@@ -17,19 +18,19 @@ public class PostController {
         this.postRepository = postRepository;
     }
 
-    @PostMapping("/api/post")
+    @PostMapping("/posts")
     public ResponseEntity<Post> createPost(@RequestBody Post post) {
         Post savedPost = postRepository.save(post);
         return ResponseEntity.ok(savedPost);
     }
 
-    @GetMapping("/api/posts")
-    public ResponseEntity<List<Post>> getPosts() {
-        List<Post> posts = postRepository.findAll();
+    @GetMapping("/posts")
+    public ResponseEntity<Page<Post>> findAll(@RequestParam(defaultValue = "1") Integer page) {
+        // page는 배열과 같이 0부터 시작해서 -1을 내부적으로 해야 첫 페이지부터 시작한다.
+        PageRequest pageRequest = PageRequest.of(page - 1, PAGE_SIZE, Sort.by("id").descending());
+        Page<Post> posts = postRepository.findAll(pageRequest);
         return ResponseEntity.ok(posts);
     }
-
-    // 글 목록을 페이징하여 반환
 
     // 글 번호를 조회
 
