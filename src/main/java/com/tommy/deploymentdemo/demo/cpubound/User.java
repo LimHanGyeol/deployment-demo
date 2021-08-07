@@ -1,4 +1,4 @@
-package com.tommy.deploymentdemo.demo;
+package com.tommy.deploymentdemo.demo.cpubound;
 
 public class User {
 

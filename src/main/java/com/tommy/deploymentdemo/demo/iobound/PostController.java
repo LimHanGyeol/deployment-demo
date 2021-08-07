@@ -18,11 +18,13 @@ public class PostController {
     private static final int PAGE_SIZE = 20;
 
     private final PostRepository postRepository;
+    private final PostCacheService postCacheService;
     private final Producer producer;
     private final ObjectMapper objectMapper;
 
-    public PostController(PostRepository postRepository, Producer producer, ObjectMapper objectMapper) {
+    public PostController(PostRepository postRepository, PostCacheService postCacheService, Producer producer, ObjectMapper objectMapper) {
         this.postRepository = postRepository;
+        this.postCacheService = postCacheService;
         this.producer = producer;
         this.objectMapper = objectMapper;
     }
@@ -37,6 +39,10 @@ public class PostController {
     @GetMapping("/posts")
     public ResponseEntity<Page<Post>> findAll(@RequestParam(defaultValue = "1") Integer page) {
         // page는 배열과 같이 0부터 시작해서 -1을 내부적으로 해야 첫 페이지부터 시작한다.
+        if (page.equals(1)) {
+            Page<Post> cachedPostPage = postCacheService.getFirstPostPage();
+            return ResponseEntity.ok(cachedPostPage);
+        }
         PageRequest pageRequest = PageRequest.of(page - 1, PAGE_SIZE, Sort.by("id").descending());
         Page<Post> posts = postRepository.findAll(pageRequest);
         return ResponseEntity.ok(posts);

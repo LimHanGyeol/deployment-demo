@@ -1,4 +1,4 @@
-package com.tommy.deploymentdemo.demo;
+package com.tommy.deploymentdemo.demo.cpubound;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
