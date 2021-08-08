@@ -23,3 +23,7 @@ spring:
     username: guest
     password: guest
     port: 5672
+  data:
+    elasticsearch:
+      hosts: localhost
+      port: 9200
