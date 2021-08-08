@@ -6,18 +6,18 @@ spring:
   config:
     activate:
       on-profile: dev
-  datasource:
-    username: postgres
-    password: pass
-    url: jdbc:postgresql://localhost:5432/postgres
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        formst_sql: true
+#  datasource:
+#    username: postgres
+#    password: pass
+#    url: jdbc:postgresql://localhost:5432/postgres
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#        formst_sql: true
   rabbitmq:
     host: localhost
     username: guest
