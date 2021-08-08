@@ -2,8 +2,8 @@ package com.tommy.deploymentdemo.demo.messagequeue;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tommy.deploymentdemo.demo.iobound.Post;
-import com.tommy.deploymentdemo.demo.iobound.PostRepository;
+import com.tommy.deploymentdemo.demo.iobound.domain.Post;
+import com.tommy.deploymentdemo.demo.iobound.domain.PostRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 

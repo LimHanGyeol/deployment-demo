@@ -1,5 +1,6 @@
-package com.tommy.deploymentdemo.demo.iobound;
+package com.tommy.deploymentdemo.demo.iobound.application;
 
+import com.tommy.deploymentdemo.demo.iobound.domain.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -11,17 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class PostCacheService {
 
-    private final PostRepository postRepository;
+//    private final PostRepository postRepository;
     private Page<Post> firstPostPage;
 
-    public PostCacheService(PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
+//    public PostCacheService(PostRepository postRepository) {
+//        this.postRepository = postRepository;
+//    }
 
     @Scheduled(cron = "* * * * * *")
     public void updateFirstPostPage() {
         PageRequest pageRequest = PageRequest.of(0, 20, Sort.by("id").descending());
-        firstPostPage = postRepository.findAll(pageRequest);
+//        firstPostPage = postRepository.findAll(pageRequest);
     }
 
     public Page<Post> getFirstPostPage() {
