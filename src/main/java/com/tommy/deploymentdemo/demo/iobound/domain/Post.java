@@ -7,7 +7,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Document(indexName = "post")
 public class Post {
 
-//    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private String id;
 
